@@ -1,9 +1,11 @@
 import java.util.Scanner;
+import java.util.Random;
 
 public class TicTacToe {
     private static char[][] board;
     private static char currentPlayer = 'X';
     private static int boardSize;
+    private static Random random = new Random();
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -16,7 +18,11 @@ public class TicTacToe {
 
         while (winner == '\0') {
             displayBoard();
-            getPlayerMove(scanner);
+            if (currentPlayer == 'X') {
+                getPlayerMove(scanner);
+            } else {
+                getComputerMove();
+            }
             winner = checkWinner();
             switchPlayer();
         }
@@ -79,12 +85,19 @@ public class TicTacToe {
         board[row][col] = currentPlayer;
     }
 
+    private static void getComputerMove() {
+        int row, col;
+        do {
+            row = random.nextInt(boardSize);
+            col = random.nextInt(boardSize);
+        } while (!isValidMove(row, col));
+
+        board[row][col] = currentPlayer;
+        System.out.println("Computer placed " + currentPlayer + " on (" + row + ", " + col + ")");
+    }
+
     private static boolean isValidMove(int row, int col) {
-        if (row < 0 || row >= boardSize || col < 0 || col >= boardSize || board[row][col] != ' ') {
-            System.out.println("Invalid move! Try again.");
-            return false;
-        }
-        return true;
+        return row >= 0 && row < boardSize && col >= 0 && col < boardSize && board[row][col] == ' ';
     }
 
     private static char checkWinner() {
@@ -127,4 +140,3 @@ public class TicTacToe {
         currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
     }
 }
-
