@@ -95,7 +95,7 @@ public class TicTacToe {
         } while (!isValidMove(row, col));
 
         board[row][col] = currentPlayer;
-        System.out.println("Computer placed " + currentPlayer + " on (" + row + ", " + col + ")");
+        System.out.println("The computer placed " + currentPlayer + " on (" + row + ", " + col + ")");
     }
 
     private static boolean isValidMove(int row, int col) {
