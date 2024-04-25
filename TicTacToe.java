@@ -9,8 +9,10 @@ public class TicTacToe {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter the size of the Tic Tac Toe board: ");
-        boardSize = scanner.nextInt();
+        do {
+            System.out.print("Enter the size of the Tic Tac Toe board: ");
+            boardSize = scanner.nextInt();
+        } while (boardSize < 2);
         board = new char[boardSize][boardSize];
 
         initializeBoard();
